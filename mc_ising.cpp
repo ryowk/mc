@@ -164,7 +164,8 @@ void updateSLMC(int N, std::vector<int> &spins, double beta, double K, double &d
 
     getCluster(N, spins, Jeff * beta, 0.0, x, y, visitedJ, visitedK, cluster);
 
-    std::vector<int> spins2(N*N);
+    static std::vector<int> spins2(N*N);
+    spins2 = spins;
     dmag = 0.0;
     for(int i=0; i<N*N; i++){
         if(cluster[i]) {
