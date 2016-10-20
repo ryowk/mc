@@ -97,7 +97,7 @@ void getCluster(int N, std::vector<int> &spins, double beta, double K, int x,
     }
 
     for (int i = 0; i < 4; i++) {
-        if (!visitedK[bondK[i]]) continue;
+        if (visitedK[bondK[i]]) continue;
         visitedK[bondK[i]] = true;
         // bondK に含まれる原点以外のスピンの座標
         int j[3] = {i, (i + 1) % 4, i + 4};
