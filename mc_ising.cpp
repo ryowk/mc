@@ -214,7 +214,7 @@ double getEnergy(int N, const std::vector<int> &spins, double J, double K){
             int s = spins[N*y+x];
             int x2 = (x+1)%N;
             int y2 = (y+1)%N;
-            ene -= s * (spins[N*y+x2] + spins[N*y2+x]);
+            ene -= J * s * (spins[N*y+x2] + spins[N*y2+x]);
             ene -= K * s * spins[N*y+x2] * spins[N*y2+x] * spins[N*y2+x2];
         }
     }
