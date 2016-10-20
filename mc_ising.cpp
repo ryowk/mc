@@ -57,7 +57,7 @@ void updateLocal(int N, std::vector<int> &spins, double beta, double K,
 
     if (dE <= 0.0 || drand(engine) < exp(-beta * dE)) {
         spins[N * y + x] = -spins[N * y + x];
-        dmag = 2.0 * spins[N * y + x] / static_cast<double>(N * N);
+        dmag = 2.0 * spins[N * y + x];
     }
 }
 
@@ -140,7 +140,6 @@ void updateWolff(int N, std::vector<int> &spins, double beta, double K,
             dmag += 2.0 * spins[i];
         }
     }
-    dmag /= static_cast<double>(N * N);
 }
 
 // SLMC
@@ -181,7 +180,6 @@ void updateSLMC(int N, std::vector<int> &spins, double beta, double K, double &d
     double dE = (EB - EBeff) - (EA - EAeff);
     if(dE <= 0 || drand(engine) < exp(-beta * dE)){
         spins = spins2;
-        dmag /= static_cast<double>(N * N);
     }else{
         dmag = 0.0;
     }
@@ -190,7 +188,6 @@ void updateSLMC(int N, std::vector<int> &spins, double beta, double K, double &d
 void getQuantities(int N, const std::vector<int> &spins, double &mag) {
     mag = 0.0;
     for (int i = 0; i < N * N; i++) mag += spins[i];
-    mag /= static_cast<double>(N * N);
 }
 
 void getInOut(int N, const std::vector<int> &spins, double K, double &corr, double &ene){
