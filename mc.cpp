@@ -30,6 +30,9 @@ int main(int argc, char *argv[]) {
         case(2):
             update = updateSLMC;
             break;
+        default:
+            std::cout << "Invalid method number" << std::endl;
+            return 0;
     }
 
     int NN = N * N;
