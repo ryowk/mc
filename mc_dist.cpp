@@ -21,13 +21,14 @@ int main(int argc, char *argv[]) {
 
     int NN = N * N;
     int Nwarm = Nwarm0 * NN;
-    double dkBT = 3.0 / NkBT;
+    double ukBT = 3.5, bkBT = 1.5;
+    double dkBT = (ukBT-bkBT) / NkBT;
 
     std::vector<int> spins(NN);
     initSpins(N, spins);
 
-    for (int ikBT = NkBT; ikBT > 0; ikBT--) {
-        double kBT = dkBT * ikBT;
+    for (int ikBT = NkBT; ikBT >= 0; ikBT--) {
+        double kBT = dkBT * ikBT + bkBT;
         double beta = 1.0 / kBT;
 
         // ウォーミングアップ

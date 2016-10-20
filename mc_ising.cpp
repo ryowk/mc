@@ -162,6 +162,7 @@ void updateSLMC(int N, std::vector<int> &spins, double beta, double K, double &d
     fill(cluster.begin(), cluster.end(), false);
     cluster[N * y + x] = true;
 
+    // 今は K=0 なので beta に Jeff の効果を押し込んでいる
     getCluster(N, spins, Jeff * beta, 0.0, x, y, visitedJ, visitedK, cluster);
 
     static std::vector<int> spins2(N*N);
@@ -178,7 +179,6 @@ void updateSLMC(int N, std::vector<int> &spins, double beta, double K, double &d
     double EAeff = getEnergy(N, spins, Jeff, 0.0);
     double EBeff = getEnergy(N, spins2, Jeff, 0.0);
     double dE = (EB - EBeff) - (EA - EAeff);
-
     if(dE <= 0 || drand(engine) < exp(-beta * dE)){
         spins = spins2;
         dmag /= static_cast<double>(N * N);

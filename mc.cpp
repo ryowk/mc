@@ -38,15 +38,13 @@ int main(int argc, char *argv[]) {
     int NN = N * N;
     int Nwarm = Nwarm0 * NN;
     int Nloop = Nloop0 * NN;
-    
     double ukBT = 3.5, bkBT = 1.5;
-
     double dkBT = (ukBT-bkBT) / NkBT;
 
     std::vector<int> spins(NN);
     initSpins(N, spins);
 
-    for (int ikBT = NkBT; ikBT > 0; ikBT--) {
+    for (int ikBT = NkBT; ikBT >= 0; ikBT--) {
         double kBT = dkBT * ikBT + bkBT;
         double beta = 1.0 / kBT;
         double mag;
