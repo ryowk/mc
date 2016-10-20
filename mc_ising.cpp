@@ -144,7 +144,9 @@ void updateWolff(int N, std::vector<int> &spins, double beta, double K,
 }
 
 // SLMC
-void updateSLMC(int N, std::vector<int> &spins, double beta, double Jeff, double K, double &dmag){
+void updateSLMC(int N, std::vector<int> &spins, double beta, double K, double &dmag){
+    const double Jeff = 1.1064;
+
     static std::random_device seed_gen;
     static std::mt19937 engine(seed_gen());
     static std::uniform_real_distribution<> drand(0.0, 1.0);
@@ -160,7 +162,7 @@ void updateSLMC(int N, std::vector<int> &spins, double beta, double Jeff, double
     fill(cluster.begin(), cluster.end(), false);
     cluster[N * y + x] = true;
 
-    getCluster(N, spins, beta, 0.0, x, y, visitedJ, visitedK, cluster);
+    getCluster(N, spins, Jeff * beta, 0.0, x, y, visitedJ, visitedK, cluster);
 
     std::vector<int> spins2;
     dmag = 0.0;

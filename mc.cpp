@@ -19,11 +19,23 @@ int main(int argc, char *argv[]) {
     double K;
     Fin >> N >> Nwarm0 >> Nloop0 >> NkBT >> K >> method;
 
+    void (*update)(int, std::vector<int>&, double, double, double&);
+    switch(method){
+        case(0):
+            update = updateLocal;
+            break;
+        case(1):
+            update = updateWolff;
+            break;
+        case(2):
+            update = updateSLMC;
+            break;
+    }
+
     int NN = N * N;
     int Nwarm = Nwarm0 * NN;
     int Nloop = Nloop0 * NN;
     double dkBT = 3.0 / NkBT;
-    double Jeff = 1.1064;
 
     std::vector<int> spins(NN);
     initSpins(N, spins);
@@ -38,25 +50,13 @@ int main(int argc, char *argv[]) {
         // ウォーミングアップ
         for (int iwarm = 0; iwarm < Nwarm; iwarm++) {
             double dmag;
-            if (method == 0)
-                updateLocal(N, spins, beta, K, dmag);
-            else if(method == 1){
-                updateWolff(N, spins, beta, K, dmag);
-            }else{
-                updateSLMC(N, spins, beta, Jeff, K, dmag);
-            }
+            update(N, spins, beta, K, dmag);
             mag += dmag;
         }
         // サンプリング
         for (int iloop = 0; iloop < Nloop; iloop++) {
             double dmag;
-            if (method == 0)
-                updateLocal(N, spins, beta, K, dmag);
-            else if(method == 1){
-                updateWolff(N, spins, beta, K, dmag);
-            }else{
-                updateSLMC(N, spins, beta, Jeff, K, dmag);
-            }
+            update(N, spins, beta, K, dmag);
             mag += dmag;
             magtot += fabs(mag);
             mag2tot += mag * mag;
