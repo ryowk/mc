@@ -52,7 +52,7 @@ void updateLocal(int N, std::vector<int> &spins, double beta, double K,
     int itempJ = 0, itempK = 0;
     for (int i = 0; i < 4; i++) itempJ += spins[xy[i]];
     for (int i = 0; i < 4; i++)
-        itempK += spins[xy[i]] * spins[xy[(i + 1) % 4]] * spins[i + 4];
+        itempK += spins[xy[i]] * spins[xy[(i + 1) % 4]] * spins[xy[i + 4]];
     double dE = 2.0 * s * (itempJ + K * itempK);
 
     if (dE <= 0.0 || drand(engine) < exp(-beta * dE)) {
