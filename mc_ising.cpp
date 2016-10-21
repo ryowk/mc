@@ -1,5 +1,6 @@
 #include "mc_ising.hpp"
 #include <iostream>
+#include <fstream>
 
 void initSpins(int N, std::vector<int> &spins) {
     static std::random_device seed_gen;
@@ -13,17 +14,12 @@ void initSpins(int N, std::vector<int> &spins) {
     }
 }
 
-void printSpins(int N, const std::vector<int> &spins) {
+void printSpins(int N, const std::vector<int> &spins, std::ofstream &Fout) {
     for (int y = 0; y < N; y++) {
         for (int x = 0; x < N; x++) {
-            char ch;
-            if (spins[N * y + x] == 1)
-                ch = 'O';
-            else
-                ch = 'X';
-            std::cout << ch << " ";
+            Fout << spins[N*y+x];
         }
-        std::cout << std::endl;
+        Fout << std::endl;
     }
 }
 

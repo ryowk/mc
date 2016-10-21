@@ -1,10 +1,11 @@
 #pragma once
 #include <vector>
 #include <random>
+#include <fstream>
 
 
 void initSpins(int N, std::vector<int> &spins);
-void printSpins(int N, const std::vector<int> &spins);
+void printSpins(int N, const std::vector<int> &spins, std::ofstream &Fout);
 void updateLocal(int N, std::vector<int> &spins, double beta, double K, double &dmag);
 void getCluster(int N, std::vector<int> &spins, double beta, double K, int x, int y, std::vector<bool> &visited, std::vector<bool> &cluster); 
 void updateWolff(int N, std::vector<int> &spins, double beta, double K, double &dmag);

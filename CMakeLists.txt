@@ -10,3 +10,6 @@ target_link_libraries(mc.out mc_ising)
 
 add_executable(mc_dist.out mc_dist.cpp)
 target_link_libraries(mc_dist.out mc_ising)
+
+add_executable(mc_ac.out mc_ac.cpp)
+target_link_libraries(mc_ac.out mc_ising)
