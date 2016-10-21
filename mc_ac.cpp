@@ -15,7 +15,7 @@ double getCorr(int NN, const std::vector<int> &spins0, const std::vector<int> &s
 int main(int argc, char *argv[]) {
     const int N = 100;
     const int NN = N*N;
-    const int Nwarm0 = 100000;
+    const int Nwarm0 = 50000;
     const int Nwarm = Nwarm0 * NN;
     const int Nloop0 = 1000;
     const double K = 0.2;
@@ -34,7 +34,7 @@ int main(int argc, char *argv[]) {
     }
 
     spins = spins0;
-    fout = "local_ac";
+    fout = "ac/local_ac";
     Fout.open(fout);
     for(int iloop = 0; iloop < Nloop0; iloop++){
         for(int i=0; i<NN; i++) updateLocal(N, spins, beta, K, dmag);
@@ -43,7 +43,7 @@ int main(int argc, char *argv[]) {
     Fout.close();
 
     spins = spins0;
-    fout = "wolff_ac";
+    fout = "ac/wolff_ac";
     Fout.open(fout);
     for(int iloop = 0; iloop < Nloop0; iloop++){
         for(int i=0; i<NN; i++) updateWolff(N, spins, beta, K, dmag);
@@ -52,7 +52,7 @@ int main(int argc, char *argv[]) {
     Fout.close();
 
     spins = spins0;
-    fout = "slmc_ac";
+    fout = "ac/slmc_ac";
     Fout.open(fout);
     initSpins(N, spins);
     for(int iloop = 0; iloop < Nloop0; iloop++){
